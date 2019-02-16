@@ -1,10 +1,13 @@
 import logging
-
 from random import randint
-
 from flask import Flask, render_template
-
 from flask_ask import Ask, statement, question, session
+import urllib3 as urllib
+import xmltodict
+import urllib.request as urllib
+import xmltodict
+from conda_env import yaml
+
 
 
 app = Flask(__name__)
@@ -13,6 +16,21 @@ ask = Ask(app, "/")
 
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
+def parse():
+    file = urllib.urlopen('https://www.morgenweb.de/feed/201-alexa-advanced-mm-startseite.xml')
+    data = file.read()
+    file.close()
+
+    data = xmltodict.parse(data)
+    return data
+
+def parse():
+    file = urllib.urlopen('https://www.morgenweb.de/feed/201-alexa-advanced-mm-startseite.xml')
+    data = file.read()
+    file.close()
+
+    data = xmltodict.parse(data)
+    return data
 
 @ask.launch
 
@@ -26,12 +44,10 @@ def new_session():
 
 def get_news(day):
 
-    # numbers = [randint(0, 9) for _ in range(3)]
 
-    news_msg = render_template('news', day=day)
-
-    # session.attributes['numbers'] = numbers[::-1]  # reverse
-
+    data = parse()
+    description = data['rss']['channel']['item'][4]['description']
+    news_msg = render_template('news', day=day, description=description)
     return statement(news_msg)
 
 # @ask.intent("YesIntent")
