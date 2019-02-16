@@ -1,6 +1,7 @@
 welcome: Hier ist Mannheimer Morgen, Was kann ich fuer Sie tun?
 
 news2:  <speak>
+  <audio src='https://s3.amazonaws.com/ask-storage/tidePooler/OceanWaves.mp3'/>
   Diese sind die letzte Nachrichten {{ day }}.
   Article 1.
   Bewährungsstrafe nach schwerem Lastwagen-Unfall.
@@ -12,10 +13,13 @@ news-en:  <speak>
   {{description}}
       </speak>
 news:  <speak>
-  <audio src='https://s3.amazonaws.com/ask-storage/tidePooler/OceanWaves.mp3'/>
-  Diese sind die letzte Nachrichten {{ day }}.
+  Diese sind die letzte Nachrichten von {{ day }}.
  erste Artikel .
-  {{description}}
+  {{description1}}
+  Artikel 2.
+  {{description2}}
+  Artikel 3.
+  {{description3}}
       </speak>
 win: Good job!
 
