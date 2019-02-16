@@ -7,7 +7,7 @@ import xmltodict
 import urllib.request as urllib
 import xmltodict
 from conda_env import yaml
-import datetime
+from _datetime import datetime, timedelta
 
 
 
@@ -25,30 +25,66 @@ def parse():
 
     data = xmltodict.parse(data)
     return data
+def get_day(day):
+    now = datetime.now()
+    abbreviation = now.strftime("%a")
+    abb = 'Sat'
+    if (day == 'heute'):
+        abb = abbreviation
+    elif (day == 'gestern'):
+        now = now - timedelta(days=1)
+        abb = now.strftime("%a")
+    elif (day == 'samstag'):
+        abb = 'Sat'
+    elif (day == 'sonntag'):
+        abb = 'Sun'
+    elif (day == 'montag'):
+        abb = 'Mon'
+    elif (day == 'dienstag'):
+        abb = 'Tue'
+    elif (day == 'mittwoch'):
+        abb = 'Wed'
+    elif (day == 'dienstag'):
+        abb = 'Thu'
+    elif (day == 'freitag'):
+        abb = 'Fri'
+
+    return abb
+
 
 @ask.launch
 
 def new_session():
 
     welcome_msg = render_template('welcome')
-
     return question(welcome_msg)
 
 @ask.intent("NewsIntent")
 
 def get_news(day):
-    now = datetime.datetime.now()
-    jour = now.day
-    mois = now.month
-    annee = now.year
+
     data = parse()
-    id = -1
-    if (day=='today') :
-        id = 1
-    elif (day=='yesterday') :
-        id = 0
-    description = data['rss']['channel']['item'][0]['description']
-    news_msg = render_template('news', day=day, description=description)
+    day1 = get_day(day)
+    # len = len(data['rss']['channel']['item'])  # [4]['description'])
+    len = 40
+    i=0
+    for elem in range(0, len):
+        abb = data['rss']['channel']['item'][elem]['pubDate']
+        if (day1==abb[0:3]):
+            if (i==0) :
+                description1 = data['rss']['channel']['item'][elem]['description']
+                i = i + 1
+                continue
+            if (i==1) :
+                description2 = data['rss']['channel']['item'][elem]['description']
+                i = i + 1
+                continue
+            if (i==2) :
+                description3 = data['rss']['channel']['item'][elem]['description']
+                i = i + 1
+                break
+
+    news_msg = render_template('news', day=day, description1=description1, description2=description2, description3=description3)
     return statement(news_msg)
 
 # @ask.intent("YesIntent")
