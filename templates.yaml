@@ -1,12 +1,16 @@
 welcome: Welcome to Mannheimer Morgen. What can I do for you?
 
-news:  <speak>
+news2:  <speak>
   Here is the news briefing for {{ day }}.
   Article 1.
   Bewährungsstrafe nach schwerem Lastwagen-Unfall.
   Mit einer Bewährungsstrafe endete am Freitagnachmittag der Prozess um einen tödlichen Unfall am 9. Juni 2017 auf der A 6 bei Mannheim Sandhofen.
       </speak>
-
+news:  <speak>
+  Here is the news briefing for {{ day }}.
+  Article 1.
+  {{description}}
+      </speak>
 win: Good job!
 
 lose: Sorry, that's the wrong answer.
