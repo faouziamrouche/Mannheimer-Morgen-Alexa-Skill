@@ -7,6 +7,8 @@ import xmltodict
 import urllib.request as urllib
 import xmltodict
 from conda_env import yaml
+import datetime
+
 
 
 
@@ -15,14 +17,6 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
-
-def parse():
-    file = urllib.urlopen('https://www.morgenweb.de/feed/201-alexa-advanced-mm-startseite.xml')
-    data = file.read()
-    file.close()
-
-    data = xmltodict.parse(data)
-    return data
 
 def parse():
     file = urllib.urlopen('https://www.morgenweb.de/feed/201-alexa-advanced-mm-startseite.xml')
@@ -43,10 +37,17 @@ def new_session():
 @ask.intent("NewsIntent")
 
 def get_news(day):
-
-
+    now = datetime.datetime.now()
+    jour = now.day
+    mois = now.month
+    annee = now.year
     data = parse()
-    description = data['rss']['channel']['item'][4]['description']
+    id = -1
+    if (day=='today') :
+        id = 1
+    elif (day=='yesterday') :
+        id = 0
+    description = data['rss']['channel']['item'][0]['description']
     news_msg = render_template('news', day=day, description=description)
     return statement(news_msg)
 
