@@ -1,14 +1,20 @@
-welcome: Welcome to Mannheimer Morgen. What can I do for you?
+welcome: Hier ist Mannheimer Morgen, Was kann ich fuer Sie tun?
 
 news2:  <speak>
-  Here is the news briefing for {{ day }}.
+  Diese sind die letzte Nachrichten {{ day }}.
   Article 1.
   Bewährungsstrafe nach schwerem Lastwagen-Unfall.
   Mit einer Bewährungsstrafe endete am Freitagnachmittag der Prozess um einen tödlichen Unfall am 9. Juni 2017 auf der A 6 bei Mannheim Sandhofen.
       </speak>
-news:  <speak>
+news-en:  <speak>
   Here is the news briefing for {{ day }}.
   Article 1.
+  {{description}}
+      </speak>
+news:  <speak>
+  <audio src='https://s3.amazonaws.com/ask-storage/tidePooler/OceanWaves.mp3'/>
+  Diese sind die letzte Nachrichten {{ day }}.
+ erste Artikel .
   {{description}}
       </speak>
 win: Good job!
