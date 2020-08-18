@@ -52,7 +52,7 @@ fastcache==1.0.2
 feedfinder2==0.0.4
 feedparser==5.2.1
 filelock==2.0.12
-Flask==0.12.1
+Flask==1.0
 Flask-Ask==0.9.8
 Flask-Cors==3.0.3
 Flask-RESTful==0.3.6
