@@ -54,7 +54,7 @@ feedparser==5.2.1
 filelock==2.0.12
 Flask==0.12.1
 Flask-Ask==0.9.8
-Flask-Cors==3.0.3
+Flask-Cors==3.0.9
 Flask-RESTful==0.3.6
 gast==0.2.0
 gevent==1.2.2
